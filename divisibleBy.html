@@ -1,0 +1,90 @@
+<meta charset="UTF-8">
+<script>
+
+class FibonaccisArrayMaths{
+   
+   static fibonacci(n){
+ 
+     var i = 2;
+       var array = [n + 1];
+     
+ 
+       array[0] = 0;											//array[0]
+     array[1] = 1;											//array[1]
+   
+ 
+   
+     while(i <= n) {											//this here is a loop that returns multiples arrays[i]
+     array[i] = array[i - 1] + array[i - 2];					//array[i]
+     i++;
+     
+     array[n] = array[n - 1] + array[n - 2];  				//array[n]
+ }
+     return array[n];
+    
+    }
+ }
+
+ function  fibonacciFunctionTimesCoeficient(n) {
+ 
+ return FibonaccisArrayMaths.fibonacci(n) * coeficient;
+ }
+
+class initialPositions{
+
+ 
+static PositionX(x){   
+var side = "nops";
+    
+    if( (x - 1 ) % 4 == 0){        
+        return side = "left"
+        } 
+
+    else if( (x - 2)  % 4 == 0 ){ 
+        return side = "bottom";
+        }
+
+    else if((x - 3) % 4 == 0 ){
+        return side = "right";
+        }
+
+    else if( (x - 4)  % 4 == 0 ){
+        return side = "top";
+        }
+ 
+    }
+}
+
+for(i = 0; i < 4; i++){
+    console.log(initialPositions.PositionX(i));
+}
+
+initialPositionX = 500;
+initialPositionY = 300;
+var positionX;
+var positionY;
+
+class Position{
+
+    static finalPosition(j){
+
+        if(initialPositions.Position(j) == 1 ){
+        positionX = initialPositionX + fibonacciFunctionTimesCoeficient(j);
+        return positionX;
+    } 
+    else if(initialPositions.Position(j) == 2){
+        positionY = initialPositionY - fibonacciFunctionTimesCoeficient(j - 1);
+        return positionY;
+    }
+
+    else if(initialPositions.Position(j) == 3 ){
+        PositionX = initialPositionX + fibonacciFunctionTimesCoeficient(j - 4)
+    } 
+    else if(initialPositions.Position(j) == 4){
+        positionY = initialPositionY + fibonacciFunctionTimesCoeficient(j)
+    }
+
+    }
+}
+
+</script>
