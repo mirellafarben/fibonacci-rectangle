@@ -6,14 +6,14 @@ var canvas = document.querySelector("canvas");
 var brush = canvas.getContext("2d");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function doStuff(){
 //runner();
 fibonnaciDrawer(10);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function runner(n){  //I used this variable to test if the fibonacci array thing is working. You can ignore it
+function runner(n){  //I used this variable to test if the fibonacci array thing is working.
 
 	var insertYourValueHere = n;
 
@@ -27,6 +27,7 @@ function runner(n){  //I used this variable to test if the fibonacci array thing
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function fibonnaciDrawer(n){
 //the limit is still 9, because I have put the squares in a order of like, term * 10 in pixels.
 
@@ -38,7 +39,7 @@ array[1] = 1; //the first two terms (0 and 1) have to be written manually
 
 
 brush.strokeStyle = "black";
-brush.strokeRect(0, 0, (array[1] * 10),(array[1] * 10)) //the first square also needs to be written manually.
+brush.strokeRect(0, 0, (array[1] * 3.7795275591),(array[1] * 3.7795275591)) //the first square also needs to be written manually.
 																												//there's no point in writing the term 0, since it would have 0 in area.
 
 
@@ -54,11 +55,11 @@ if( i = (n + 1) ){			//this line here will alllow the computer to only start to 
 
 for(var j = 1; j < n; j++){   //the "i" variable will be responsible for creating the numbers. the "j" variable will be responsible for the drawing.
 
-var secretFormula = (array[j + 2] - 1) * 10;  //this is the mathematical pattern I've found in the position X of the squares.
+var secretFormula = (array[j + 2] - 1) * 3.7795275591;  //this is the mathematical pattern I've found in the position X of the squares.
 
 console.log(secretFormula)
 
-	brush.strokeRect(secretFormula, 0, (array[(j + 1)] * 10), (array[(j + 1)] * 10) )  //this will draw the rectangle. no biggie.
+	brush.strokeRect(secretFormula, 0, (array[(j + 1)] * 3.7795275591), (array[(j + 1)] * 3.7795275591) )  //this will draw the rectangle. no biggie.
 
 					}
 			}
