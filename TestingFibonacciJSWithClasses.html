@@ -6,7 +6,7 @@
 var canvas = document.querySelector("canvas");
 var brush = canvas.getContext("2d");
 
-var coeficient = 10
+var coeficient = 12
  //this will be the coeficient. 3.7795275591 is how many pixels are in a centimeter. 
 
 
@@ -32,31 +32,36 @@ var coeficient = 10
             return array[n];
         
         }
-        }
+        
+    }
             class initialPositions{
             
             static Position(x){   
-            var side = "nops";
+
+            var putZeroOnThisSwitch = 0;
                 
-                if( (x - 1 ) % 4 == 0){        
-                    return side = 1;
-                    } 
+                switch(putZeroOnThisSwitch){
 
-                else if( (x - 2)  % 4 == 0 ){ 
-                    return side = 2;
-                    }
+                case((x - 1) % 4):  
 
-                else if((x - 3) % 4 == 0 ){
-                    return side = 3;
-                    }
+                    return putZeroOnThisSwitch = "left";
+                    break;
 
-                else if( (x - 4)  % 4 == 0 ){
-                    return side = 4;
-                    }
+                case( (x - 2)  % 4): 
+                    return putZeroOnThisSwitch = "bottom";
+                    break;
+
+                case((x - 3) % 4):
+                    return putZeroOnThisSwitch = "right";
+                    break;
+
+                case( (x - 4)  % 4):
+                    return putZeroOnThisSwitch = "top";
+                    break;
             
                 }
             }
- 
+        }
  
     function  fibonacciFunctionTimesCoeficient(n) {return FibonaccisArrayMaths.fibonacci(n) * coeficient;}
     var initialPositionX = 640;
@@ -77,57 +82,65 @@ var coeficient = 10
 
                 static finalPositionX(j){
 
-                    if(initialPositions.Position(j) == 1 ){
-                    positionX = initialPositionX - fibonacciFunctionTimesCoeficient(j + 1) - addToPositionX;
-                    addToPositionX += fibonacciFunctionTimesCoeficient(j + 1)
-                    return positionX;
-                    
-                } 
-                else if(initialPositions.Position(j) == 2){
+                    switch(initialPositions.Position(j)){
+                 
+                    case("left"):    
+                        positionX = initialPositionX - fibonacciFunctionTimesCoeficient(j + 1) - addToPositionX;
+                        addToPositionX += fibonacciFunctionTimesCoeficient(j + 1)
+                        return positionX;
+                        break;
+                 
+                case("bottom"):
                    return positionX;
-                }
+                   break;
 
-                else if(initialPositions.Position(j) == 3 ){
+                case("right"):
                     positionX = initialPositionX + fibonacciFunctionTimesCoeficient(1) + goToTheRight;
                     goToTheRight += fibonacciFunctionTimesCoeficient(j + 1);
                     return positionX
-                } 
-                else if(initialPositions.Position(j) == 4){
+                    break;
+
+                case("top"):
                     positionX = initialPositionX - fibonacciFunctionTimesCoeficient(j - 2) - youGottaGoToTheLeftToGoToTheTop;
                     youGottaGoToTheLeftToGoToTheTop += fibonacciFunctionTimesCoeficient(j - 2)
                     return positionX
-                }
+                
 
             }
+        }
 
             static finalPositionY(i){
                 
-                if(initialPositions.Position(i) == 1 ){
+                switch(initialPositions.Position(i)){
+               
+               case("left"):
                     return positionY;
-                } 
-                else if(initialPositions.Position(i) == 2){
+                    break;
+                
+                case("bottom"):
                    positionY = initialPositionY + fibonacciFunctionTimesCoeficient(1) + addToPositionY;
                    addToPositionY += fibonacciFunctionTimesCoeficient(i + 1)
                    return positionY;
-                }
-
-                else if(initialPositions.Position(i) == 3 ){
+                   break;
+                
+                
+                case("right"):
                     positionY = initialPositionY - youGottaGoToTheTopToGoToTheRight;
                     youGottaGoToTheTopToGoToTheRight += fibonacciFunctionTimesCoeficient(i + 2)
                     return positionY;
-                } 
-                else if(initialPositions.Position(i) == 4){
+                    break;
+
+
+                case("top"):
                     positionY = initialPositionY - fibonacciFunctionTimesCoeficient(i + 1) - goToTheTop;
                     goToTheTop += fibonacciFunctionTimesCoeficient(i + 1);
                     return positionY;
-                }
+                    break;
                 
             }
 
         }
-
-        
-
+    }
 
                             
 
@@ -156,10 +169,19 @@ var coeficient = 10
 
 
 
-        function doStuff() {
 
-        DrawFibonacciRectangle(8);
+
+
+
+        function doStuff() {
+        
+        DrawFibonacciRectangle(8)
         }
+   
+       
+
+
         doStuff();
+        
 
         </script>
