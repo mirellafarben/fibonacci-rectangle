@@ -6,9 +6,9 @@
 var canvas = document.querySelector("canvas");
 var brush = canvas.getContext("2d");
 
-var coeficient = 12
+var coeficient = 10
  //this will be the coeficient. 3.7795275591 is how many pixels are in a centimeter. 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         class FibonaccisArrayMaths{
         
@@ -34,6 +34,9 @@ var coeficient = 12
         }
         
     }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             class initialPositions{
             
             static Position(x){   
@@ -62,6 +65,8 @@ var coeficient = 12
                 }
             }
         }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
     function  fibonacciFunctionTimesCoeficient(n) {return FibonaccisArrayMaths.fibonacci(n) * coeficient;}
     var initialPositionX = 640;
@@ -142,46 +147,221 @@ var coeficient = 12
         }
     }
 
-                            
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var initialPositionXArc = 640;
+    var initialPositionYArc = 360;
+    var positionXArc = initialPositionXArc;    
+    var positionYArc = initialPositionYArc;
 
+    var addToPositionXArc = 0;
+    var addToPositionYArc = 0;
 
+    var goToTheRightArc = 0;
+    var goToTheTopArc = 0;
+    var youGottaGoToTheTopToGoToTheRightArc = 0;
+    var youGottaGoToTheLeftToGoToTheTopArc = 0;
     
-        class DrawerIndicator{
+                            
+    class PositionsToDrawTheArcs{
+        
+        static arcPositionX(x){
 
-            static DrawerPositionIndicator(j){
-                brush.strokeRect(PositionXAndYreturner.finalPositionX(j), PositionXAndYreturner.finalPositionY(j), fibonacciFunctionTimesCoeficient(j + 1), fibonacciFunctionTimesCoeficient(j + 1  ))
+            switch(initialPositions.Position(x)){
+
+                case("left"):    
+                positionXArc = initialPositionXArc - fibonacciFunctionTimesCoeficient(x + 1) - addToPositionXArc;
+                addToPositionXArc += fibonacciFunctionTimesCoeficient(x + 1)
+                        return positionXArc;
+                        break;
+                 
+                case("bottom"):
+                   return positionXArc;
+                   break;
+
+                case("right"):
+                positionXArc = initialPositionXArc + fibonacciFunctionTimesCoeficient(1) + goToTheRightArc;
+                goToTheRightArc += fibonacciFunctionTimesCoeficient(x + 1);
+                    return positionXArc
+                    break;
+
+                case("top"):
+                positionXArc = initialPositionXArc - fibonacciFunctionTimesCoeficient(x - 2) - youGottaGoToTheLeftToGoToTheTopArc;
+                youGottaGoToTheLeftToGoToTheTopArc += fibonacciFunctionTimesCoeficient(x - 2)
+                    return positionXArc
+              
+
             }
 
         }
 
+              static arcPositionY(y){
+
+                switch(initialPositions.Position(y)){
+
+                    case("left"):
+                    return positionYArc;
+                    break;
+                
+                case("bottom"):
+                positionYArc = initialPositionYArc + fibonacciFunctionTimesCoeficient(1) + addToPositionYArc;
+                addToPositionYArc += fibonacciFunctionTimesCoeficient(y + 1)
+                   return positionYArc;
+                   break;
+                
+                
+                case("right"):
+                positionYArc = initialPositionYArc - youGottaGoToTheTopToGoToTheRightArc;
+                youGottaGoToTheTopToGoToTheRightArc += fibonacciFunctionTimesCoeficient(y + 2)
+                    return positionYArc;
+                    break;
+
+
+                case("top"):
+                positionYArc = initialPositionYArc - fibonacciFunctionTimesCoeficient(y + 1) - goToTheTopArc;
+                goToTheTopArc += fibonacciFunctionTimesCoeficient(y + 1);
+                    return positionYArc;
+                    break;
+            }
+        }    
+ 
+// left: 1 * Math.PI, 1.5 * Math.PI   
+// bottom: 0.5 * Math.PI, 1 * Math.PI     
+// right: 0 * Math.PI , 0.5 * Math.PI
+// top: 1.5 * Math.PI, 0 * Math.PI
+ 
+ 
+            static arcStartingAngle(sa){
+                var startingAngle = 0 * Math.PI
+                switch(initialPositions.Position(sa)){
+                
+                case("left"):
+                return startingAngle = 1 * Math.PI;
+                break;
+
+                case("bottom"):
+                return startingAngle = 0.5 * Math.PI;
+                break;
+
+                case("right"):
+                return startingAngle = 0 * Math.PI;
+                break;
+
+                case("top"):
+                return startingAngle = 1.5 * Math.PI;
+                }
+
+
+            }
+ 
+            static arcEndingAngle(ea){
+            var endingAngle = 0 * Math.PI
+            switch(initialPositions.Position(ea)){
+
+            case("left"):
+            return endingAngle = 1.5 * Math.PI;
+            break;
+
+            case("bottom"):
+            return endingAngle = 1 * Math.PI;
+            break;
+
+            case("right"):
+            return endingAngle = 0.5 * Math.PI;
+            break;
+
+            case("top"):
+            return endingAngle = 0 * Math.PI;
+
+            }
+
+
+            }
+            
+
+ 
+ 
+ 
+    }
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+        class DrawerIndicator{
+
+            static DrawerPositionIndicator(j){ 
+                brush.strokeRect(PositionXAndYreturner.finalPositionX(j), PositionXAndYreturner.finalPositionY(j), fibonacciFunctionTimesCoeficient(j + 1), fibonacciFunctionTimesCoeficient(j + 1  ))
+           
+            }
+
+        }
+
+
+
         function DrawFibonacciRectangle(chooseANumber){
         brush.strokeStyle = "black";
-    
-
         brush.strokeRect(initialPositionX, initialPositionY, fibonacciFunctionTimesCoeficient(1),  fibonacciFunctionTimesCoeficient(1) );
 
 
         for(n = 1; n < chooseANumber; n++){
         DrawerIndicator.DrawerPositionIndicator(n);
-        
             }
+        
+        }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ class ArcDrawerIndicator{
+
+
+         static ArcDrawerPositionIndicator(adpi){
+             brush.beginPath();
+             brush.arc(PositionsToDrawTheArcs.arcPositionX(adpi), PositionsToDrawTheArcs.arcPositionY(adpi), fibonacciFunctionTimesCoeficient(adpi + 1), PositionsToDrawTheArcs.arcStartingAngle(adpi), PositionsToDrawTheArcs.arcEndingAngle(adpi) );
+             brush.stroke();    
+            
+            }
+        
         }
 
+function DrawArc(number){
+
+brush.beginPath();
+brush.arc(640, 360, fibonacciFunctionTimesCoeficient(2), PositionsToDrawTheArcs.arcStartingAngle(1), PositionsToDrawTheArcs.arcEndingAngle(1));
+
+
+for(n = 1; n < number; n++){
+ArcDrawerIndicator.ArcDrawerPositionIndicator(n);
+ }
+
+}
 
 
 
 
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         function doStuff() {
         
-        DrawFibonacciRectangle(8)
-        }
-   
+
+        DrawFibonacciRectangle(8);
+        DrawArc(8);
+    
+    }
        
+    
 
 
         doStuff();
+
+
         
 
-        </script>
+</script>   
+
+
+
+        
