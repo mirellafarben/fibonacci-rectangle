@@ -6,8 +6,6 @@
 var canvas = document.querySelector("canvas");
 var brush = canvas.getContext("2d");
 
-var coeficient = 10
- //this will be the coeficient. 3.7795275591 is how many pixels are in a centimeter. 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         class FibonaccisArrayMaths{
@@ -68,11 +66,14 @@ var coeficient = 10
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
+  
+  
     function  fibonacciFunctionTimesCoeficient(n) {return FibonaccisArrayMaths.fibonacci(n) * coeficient;}
     var initialPositionX = 640;
     var initialPositionY = 360;
     var positionX = initialPositionX;    
     var positionY = initialPositionY;
+    
 
     var addToPositionX = 0;
     var addToPositionY = 0;
@@ -152,14 +153,18 @@ var coeficient = 10
     var initialPositionYArc = 360;
     var positionXArc = initialPositionXArc;    
     var positionYArc = initialPositionYArc;
+    
 
     var addToPositionXArc = 0;
     var addToPositionYArc = 0;
 
     var goToTheRightArc = 0;
-    var goToTheTopArc = 0;
+    var goToTopArc = 0;
+    var goToTheLeftArc = 0;
     var youGottaGoToTheTopToGoToTheRightArc = 0;
     var youGottaGoToTheLeftToGoToTheTopArc = 0;
+    
+    var leftArc = 0;
     
                             
     class PositionsToDrawTheArcs{
@@ -169,24 +174,24 @@ var coeficient = 10
             switch(initialPositions.Position(x)){
 
                 case("left"):    
-                positionXArc = initialPositionXArc - fibonacciFunctionTimesCoeficient(x + 1) - addToPositionXArc;
-                addToPositionXArc += fibonacciFunctionTimesCoeficient(x + 1)
+                    // positionXArc = initialPositionXArc  - addToPositionXArc - fibonacciFunctionTimesCoeficient(2);
+                    // addToPositionXArc = fibonacciFunctionTimesCoeficient(x + 1);
                         return positionXArc;
                         break;
                  
                 case("bottom"):
-                   return positionXArc;
+                   return positionXArc + fibonacciFunctionTimesCoeficient(x - 1);
                    break;
 
                 case("right"):
-                positionXArc = initialPositionXArc + fibonacciFunctionTimesCoeficient(1) + goToTheRightArc;
-                goToTheRightArc += fibonacciFunctionTimesCoeficient(x + 1);
+                    positionXArc = initialPositionXArc + fibonacciFunctionTimesCoeficient(1) + goToTheRightArc;
+                    goToTheRightArc += fibonacciFunctionTimesCoeficient(x + 1);    
                     return positionXArc
                     break;
 
                 case("top"):
-                positionXArc = initialPositionXArc - fibonacciFunctionTimesCoeficient(x - 2) - youGottaGoToTheLeftToGoToTheTopArc;
-                youGottaGoToTheLeftToGoToTheTopArc += fibonacciFunctionTimesCoeficient(x - 2)
+                    positionXArc = initialPositionXArc - fibonacciFunctionTimesCoeficient(x - 2) - youGottaGoToTheLeftToGoToTheTopArc;
+                    youGottaGoToTheLeftToGoToTheTopArc += fibonacciFunctionTimesCoeficient(x - 2)
                     return positionXArc
               
 
@@ -194,35 +199,39 @@ var coeficient = 10
 
         }
 
+        
               static arcPositionY(y){
 
                 switch(initialPositions.Position(y)){
 
                     case("left"):
-                    return positionYArc;
+                    positionYArc = initialPositionYArc + leftArc + fibonacciFunctionTimesCoeficient(2)
+                    leftArc += fibonacciFunctionTimesCoeficient(y + 2);
+                    return positionYArc 
                     break;
                 
                 case("bottom"):
-                positionYArc = initialPositionYArc + fibonacciFunctionTimesCoeficient(1) + addToPositionYArc;
-                addToPositionYArc += fibonacciFunctionTimesCoeficient(y + 1)
+                   positionYArc = initialPositionYArc + fibonacciFunctionTimesCoeficient(1) + addToPositionYArc;
+                   addToPositionYArc += fibonacciFunctionTimesCoeficient(y + 1)
                    return positionYArc;
                    break;
                 
                 
                 case("right"):
-                positionYArc = initialPositionYArc - youGottaGoToTheTopToGoToTheRightArc;
-                youGottaGoToTheTopToGoToTheRightArc += fibonacciFunctionTimesCoeficient(y + 2)
+                    positionYArc = initialPositionYArc - youGottaGoToTheTopToGoToTheRightArc;
+                    youGottaGoToTheTopToGoToTheRightArc += fibonacciFunctionTimesCoeficient(y + 2)
                     return positionYArc;
                     break;
 
 
                 case("top"):
-                positionYArc = initialPositionYArc - fibonacciFunctionTimesCoeficient(y + 1) - goToTheTopArc;
-                goToTheTopArc += fibonacciFunctionTimesCoeficient(y + 1);
+                    // positionYArc = initialPositionYArc - fibonacciFunctionTimesCoeficient(y + 1) - goToTopArc ;
+                    // goToTopArc = fibonacciFunctionTimesCoeficient(y + 1)
                     return positionYArc;
                     break;
             }
         }    
+
  
 // left: 1 * Math.PI, 1.5 * Math.PI   
 // bottom: 0.5 * Math.PI, 1 * Math.PI     
@@ -235,11 +244,11 @@ var coeficient = 10
                 switch(initialPositions.Position(sa)){
                 
                 case("left"):
-                return startingAngle = 1 * Math.PI;
+                return startingAngle = 1.5 * Math.PI;
                 break;
 
                 case("bottom"):
-                return startingAngle = 0.5 * Math.PI;
+                return startingAngle = 1 * Math.PI;
                 break;
 
                 case("right"):
@@ -258,11 +267,11 @@ var coeficient = 10
             switch(initialPositions.Position(ea)){
 
             case("left"):
-            return endingAngle = 1.5 * Math.PI;
+            return endingAngle = 1 * Math.PI;
             break;
 
             case("bottom"):
-            return endingAngle = 1 * Math.PI;
+            return endingAngle = 0.5 * Math.PI;
             break;
 
             case("right"):
@@ -270,13 +279,39 @@ var coeficient = 10
             break;
 
             case("top"):
-            return endingAngle = 0 * Math.PI;
+            return endingAngle = 2 * Math.PI;
 
             }
 
 
             }
             
+        static clockwiseOrCounterClockwise(cocc){
+            var counterclockwiseOrNot = true;
+
+            switch(initialPositions.Position(cocc)){
+            
+            case("left"):
+            return counterclockwiseOrNot = true;
+            break;
+        
+            case("bottom"):
+            return counterclockwiseOrNot = true;
+            break;
+
+            case("right"): 
+            return counterclockwiseOrNot = false;
+            break;
+            
+            case("top"):
+            return counterclockwiseOrNot = false;
+            break;
+                       
+            
+            }
+
+
+        }
 
  
  
@@ -318,7 +353,7 @@ var coeficient = 10
 
          static ArcDrawerPositionIndicator(adpi){
              brush.beginPath();
-             brush.arc(PositionsToDrawTheArcs.arcPositionX(adpi), PositionsToDrawTheArcs.arcPositionY(adpi), fibonacciFunctionTimesCoeficient(adpi + 1), PositionsToDrawTheArcs.arcStartingAngle(adpi), PositionsToDrawTheArcs.arcEndingAngle(adpi) );
+             brush.arc(PositionsToDrawTheArcs.arcPositionX(adpi), PositionsToDrawTheArcs.arcPositionY(adpi), fibonacciFunctionTimesCoeficient(adpi + 1), PositionsToDrawTheArcs.arcStartingAngle(adpi), PositionsToDrawTheArcs.arcEndingAngle(adpi), PositionsToDrawTheArcs.clockwiseOrCounterClockwise(adpi) );
              brush.stroke();    
             
             }
@@ -328,7 +363,8 @@ var coeficient = 10
 function DrawArc(number){
 
 brush.beginPath();
-brush.arc(640, 360, fibonacciFunctionTimesCoeficient(2), PositionsToDrawTheArcs.arcStartingAngle(1), PositionsToDrawTheArcs.arcEndingAngle(1));
+brush.arc(640, 370, fibonacciFunctionTimesCoeficient(2), 1.5 * Math.PI, 0 * Math.PI);
+brush.stroke();
 
 
 for(n = 1; n < number; n++){
@@ -344,11 +380,18 @@ ArcDrawerIndicator.ArcDrawerPositionIndicator(n);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+var number = 14;
+var coeficient = 1;
+
+
         function doStuff() {
         
+            console.log(fibonacciFunctionTimesCoeficient(6));
+ 
 
-        DrawFibonacciRectangle(8);
-        DrawArc(8);
+
+        DrawFibonacciRectangle(number);
+        DrawArc(number);
     
     }
        
