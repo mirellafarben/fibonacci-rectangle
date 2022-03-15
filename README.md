@@ -12,5 +12,4 @@ Oh yeah, I basicaly switch beetween java and javascript because:
 -On javascript, contrarily to java, you can save your code and immediatly test it on your browser, which, in my opinion, is better for this whole geometrical space thing.
 
 In few words:
-I do the raw maths in java.
-I do the geometrical operations in javascript.
+I do the raw maths in java and the geometrical operations I do in javascript.
